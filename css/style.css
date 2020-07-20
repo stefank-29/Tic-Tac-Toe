@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+:root{
+    --cellSize : 15rem;
+    --signSize : calc(var(--cellSize)*0.9);
+}
+
+
 html{
     font-size: 10px;
 }
@@ -27,7 +33,7 @@ body{
 /**************************************/
 
 
-#board{
+.board{
     display: grid;
     height: 50rem;
     width: 50rem;
@@ -37,21 +43,86 @@ body{
 }
 
 .field{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15rem;
     font-family: 'Roboto', sans-serif;
-    border: 5px solid black;
+    border: 3px solid black;
+    cursor: pointer;
+}
+
+/****   x   ******/
+.field.x::after,
+.field.field.x::before{
+    background-color: black;
+}
+.board.x .field:not(.x):not(.o):hover::after,
+.board.x .field:not(.x):not(.o):hover::before{
+    background-color: rgb(115, 201, 235);
+}
+
+.field.x::after,
+.field.x::before,
+.board.x .field:not(.x):not(.o):hover::after,
+.board.x .field:not(.x):not(.o):hover::before{
+    content: '';
+    position: absolute;
+    width: calc(var(--signSize)*0.15);
+    height: var(--signSize);
+}
+
+.field.x::after,
+.board.x .field:not(.x):not(.o):hover::after{
+    transform: rotate(45deg);
+}
+
+.field.field.x::before,
+.board.x .field:not(.x):not(.o):hover::before{
+    transform: rotate(-45deg);
+}
+
+.field.o::after,
+.field.o::before,
+.board.o .field:not(.x):not(.o):hover::before,
+.board.o .field.field:not(.x):not(.o):hover::after{
+    content: '';
+    position: absolute;
+    width:  calc(var(--signSize)*0.9);
+    height: calc(var(--signSize)*0.9);
+    border-radius: 50%;
+ 
+}
+
+.field.o::after,
+.field.o::before{
+    border: calc(var(--signSize)*0.15) solid black;
+}
+
+.board.o .field:not(.x):not(.o):hover::after,
+.board.o .field:not(.x):not(.o):hover::before{
+    border: calc(var(--signSize)*0.15) solid rgb(115, 201, 235);
+}
+
+
+
+
+
+
+
+.field.x,
+.field.o{
+    cursor: not-allowed;
 }
 
 .field:first-child,.field:nth-child(2),.field:nth-child(3){
     border-top: none;
 }
-.field:first-child,.field:nth-child(4),.field:nth-child(7){
+.field:nth-child(3n + 1){
     border-left: none;
 }
-.field:nth-child(3),.field:nth-child(6),.field:nth-child(9){
+.field:nth-child(3n){
     border-right: none;
 }
 .field:nth-child(7),.field:nth-child(8),.field:nth-child(9){
@@ -59,8 +130,38 @@ body{
 }
 
 
+/***************modal Popup*************/
 
+#modalBg{
+    display: flex;
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(71, 7, 7, 0.7);
+   
+}
 
+#modalPopup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50rem;
+    width: 50rem;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    font-size: 7rem;
+    font-family: 'Lato', sans-serif;
+
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
