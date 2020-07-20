@@ -15,16 +15,86 @@ html{
 body{
     margin: 0;
     padding: 0;
-
+    background-image: url('../images/moroccan-flower-dark.png');
+}
+/*****welcome page********/
+#welcomePage{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+#welcome-container{
+    display: flex;
+    height: 50rem;
+    width: 60rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 0 0 10px rgb(115, 201, 235);
+    box-shadow: 0 0 5px 1px whitesmoke;
+}
+
+#welcomePage input{
+    border: 1px solid whitesmoke;
+    background-color: whitesmoke;
+    border-radius: 3px;
+    padding: 1.2rem 0.7rem;
+    font-size: 1.5rem;
+    outline: none;
+}
+#welcomePage p{
+    font-size: 2rem;
+}
+#btnPlay{
+    margin-top: 5rem !important;
+}
+
+#title{
+    font-family: 'Pacifico', cursive;
+    font-size: 10rem;
+    margin: 4rem;
+}
+
+#buttons{
+    margin: 3rem;
+}
+
+#welcomePage button{
+    margin: 3rem;
+    padding: 1.5rem 2rem;
+    width: 12rem;
+    border-radius: 5px;
+    border: 2px solid rgb(28, 64, 184);
+    background-color: rgba(10, 186, 255, 0.8);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8rem;
+    color: whitesmoke;
+    box-shadow: 0 0 3px 1px rgb(115, 201, 235);
+}
+#welcomePage button:hover{
+    background-color: rgb(115, 201, 235);
+    color: rgb(54, 39, 39);
+    border-color: whitesmoke;
+}
+
+/******************/
 .page-container{
     position: relative;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
 }   
+
 
 .page-content{
     padding-bottom: 3.5rem;
@@ -220,7 +290,7 @@ footer div {
     font-family: sans-serif;
     color: rgb(255, 255, 255);
     font-weight: 600;
-    background-color: rgba(236, 81, 81, 0.3);
+    background-color: rgba(115, 201, 235, 0.5);
 }
 /*rgba(39, 131, 236, 0.3);*/
 footer a {

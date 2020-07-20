@@ -174,6 +174,46 @@ const messageShow = (() => {
     }
 })();
 
+const welcomePage = (() => {
+    const btnPlayer = document.querySelector("#btnPlayer");
+    const container = document.querySelector("#welcome-container");
+    const welcomePage = document.querySelector("#welcomePage");
+    const gamePage = document.querySelector(".page-container");
+    const ply1 = document.querySelector("#player1");
+    const ply2 = document.querySelector("#player2");
+    const body = document.querySelector("body");
+
+    const showGameboard = () => {
+        welcomePage.style.display = 'none';
+        gamePage.style.display = 'flex';
+        body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
+        
+    }
+
+    const playerMenu = () => {
+        container.innerHTML = `<div id="player1">
+        <p>Player 1</p>
+            <input id='in1' type="text">
+        </div>
+        <div id="player2">
+            <p>Player 2</p>
+            <input id='in2' type="text">
+        </div>
+        `;
+        const btnPlay = document.createElement('button');
+        btnPlay.textContent = 'Play';
+        btnPlay.setAttribute('id', 'btnPlay');
+        btnPlay.addEventListener('click', showGameboard);
+        container.appendChild(btnPlay);
+        const in1 = document.querySelector('#in1');
+        console.log(in1); // ne ovde
+    }
+   
+    
+    
+    btnPlayer.addEventListener('click', playerMenu);
+})();
+
 const player = (name, sign) => {
     let score = 0;
 
@@ -193,7 +233,6 @@ window.onload = gameBoard.startUp(true);
 
 
 //Todo - Obojiti drugom bojom pobenicku kombinaciju
-//Todo - Rezultat trenutni
 //Todo - 
 //Todo
 //Todo

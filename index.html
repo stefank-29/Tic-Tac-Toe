@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">	
-
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,16 +22,48 @@
                 <button id="newRound">New round</button>
                 <button id="restartBtn">Restart game</button>
             </div>
-            
+
         </div>
 
+    </div>
+
+    <div id="welcomePage">
+        <div id="welcome-container">
+            <div id= "title">
+                Tic Tac Toe
+            </div>
+
+            <div id="buttons">
+                <button id="btnPlayer">Player</button>
+                <button id="btnComputer">Computer</button>
+            </div>
+        
+            <!--<div id="player1">
+                <p>Player 1</p>
+                <input type="text">
+            </div>
+            <div id="player2">
+                <p>Player 2</p>
+                <input type="text">
+            </div>
+            <button id="btnPlay">Play</button>
+        -->
+        </div>
+
+        <footer>
+            <div>
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script>&nbsp;&nbsp;Created by Stefan Karaferovic
+                | <i class="fab fa-github"></i> <a href="https://github.com/stefank-29" target="_blank">stefank-29</a>
+            </div>
+        </footer>
     </div>
 
     <div class="page-container">
        
         <div class="page-content">
             <div class="score">
-                <p class="player">Player 1 (x)</p>
+                <p id='player1' class="player">Player 1 (x)</p>
                 <p id="score1">0</p>
             </div>
             <div class="board">
@@ -46,7 +78,7 @@
 
             </div>
             <div class="score">
-                <p class="player">Player 2 (o)</p> <!--ili kompjuter-->
+                <p id='player2' class="player">Player 2 (o)</p> <!--ili kompjuter-->
                 <p id="score2">0</p>
             </div>
         </div>
