@@ -78,4 +78,7 @@ const aiGame = (() => {
 
 //TODO - Obojiti drugom bojom pobenicku kombinaciju                                                 
 //TODO - AI posle par sekundi
+//TODO - Efekat kad se klikne na polje
 //TODO - Back dugme
+//TODO - README
+//TODO - Okaciti na TOP
