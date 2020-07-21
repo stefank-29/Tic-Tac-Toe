@@ -61,36 +61,59 @@ const gameBoard = (() => {
 
 const displayController = (() =>{
     const populateField = () => {
-       if(!event.target.classList.contains('x') || !event.target.classList.contains('o')){
-            if(game.turn == 1){
-                gameBoard.board.classList.toggle('x');
-                gameBoard.board.classList.toggle('o');
-                event.target.classList.add('x');
-                gameBoard.fields[event.target.dataset.index] = 'x';
-                if(game.check3InARow('x')){
-                    //console.log("Winner x!");
-                    messageShow.win('X');
-                    return;
-                }
-                game.turn = 2;
-            }else{
+        if(!game.aiGame){
+            if(!event.target.classList.contains('x') && !event.target.classList.contains('o')){
+                    if(game.turn == 1){
+                        gameBoard.board.classList.toggle('x');
+                        gameBoard.board.classList.toggle('o');
+                        event.target.classList.add('x');
+                        gameBoard.fields[event.target.dataset.index] = 'x';
+                        if(game.check3InARow('x')){
+                            //console.log("Winner x!");
+                            messageShow.win('X');
+                            return;
+                        }
+                        game.turn = 2;
+                    }else{
+                        gameBoard.board.classList.toggle('x');
+                        gameBoard.board.classList.toggle('o');
+                        event.target.classList.add('o');
+                        gameBoard.fields[event.target.dataset.index] = 'o';
+                        if(game.check3InARow('o')){
+                            //console.log("Winner o!");
+                            messageShow.win("O");
+                            return;
+                        }
+                        game.turn = 1;
+                    }
+                    //console.table(gameBoard.fields);
+                    if(game.checkDraw()){
+                    // console.log("Its draw!")
+                    messageShow.draw();
+                    }
+            }
+        }else{
+            if(!event.target.classList.contains('x') && !event.target.classList.contains('o')){
                 gameBoard.board.classList.toggle('x');
                 gameBoard.board.classList.toggle('o');
                 event.target.classList.add('o');
                 gameBoard.fields[event.target.dataset.index] = 'o';
                 if(game.check3InARow('o')){
-                    //console.log("Winner o!");
                     messageShow.win("O");
                     return;
                 }
-                game.turn = 1;
+                if(game.checkDraw()){
+                    messageShow.draw();
+                }
+                aiGame.bestMove();
+                
+
+               
             }
-            //console.table(gameBoard.fields);
-            if(game.checkDraw()){
-               // console.log("Its draw!")
-               messageShow.draw();
-            }
-       }
+
+
+
+        }
     }
     return {
         populateField,
@@ -98,6 +121,7 @@ const displayController = (() =>{
 })();
 
 const game = (() => {
+    let aiGame = false;
     let startPlayer = 0;
     let turn = startPlayer + 1;
     const check3InARow = (sign) => {
@@ -119,6 +143,7 @@ const game = (() => {
         check3InARow,
         checkDraw,
         startPlayer,
+        aiGame,
     }
 })();
 
@@ -156,12 +181,24 @@ const messageShow = (() => {
         score1.textContent = 0;
         score2.textContent = 0;
         gameBoard.startUp(true);
+        if(game.aiGame){
+            aiGame.bestMove();
+        }
     }
 
     const newRound = () => {
         modal.style.display = 'none';
         gameBoard.startUp(false);
-        game.startPlayer = (game.startPlayer + 1)%2;
+        if(!game.aiGame){
+            game.startPlayer = (game.startPlayer + 1)%2;
+        }else{
+            if(game.startPlayer == 0){
+                game.startPlayer = 1;
+            }else{
+                game.startPlayer = 0;
+                aiGame.bestMove();
+            }
+        }
     }
 
 
@@ -176,6 +213,7 @@ const messageShow = (() => {
 
 const welcomePage = (() => {
     const btnPlayer = document.querySelector("#btnPlayer");
+    const btnComputer = document.querySelector("#btnComputer");
     const container = document.querySelector("#welcome-container");
     const welcomePage = document.querySelector("#welcomePage");
     const gamePage = document.querySelector(".page-container");
@@ -190,6 +228,16 @@ const welcomePage = (() => {
         ply1.textContent = `${in1.value} (x)`;
         ply2.textContent = `${in2.value} (o)`;
                
+    }
+
+    const showAiGameboard = () => {
+        welcomePage.style.display = 'none';
+        gamePage.style.display = 'flex';
+        body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
+        ply1.textContent = 'Computer (x)';
+        ply2.textContent = 'Player (o)';
+        game.aiGame = true;
+        aiGame.bestMove(); 
     }
 
     const playerMenu = () => {
@@ -212,7 +260,7 @@ const welcomePage = (() => {
     }
    
     btnPlayer.addEventListener('click', playerMenu);
-
+    btnComputer.addEventListener('click', showAiGameboard);
 
 })();
 
@@ -232,9 +280,3 @@ const player2 = player('Aleksa', 'o');
 
 
 window.onload = gameBoard.startUp(true);
-
-
-//Todo - Obojiti drugom bojom pobenicku kombinaciju
-//Todo - 
-//Todo
-//Todo
