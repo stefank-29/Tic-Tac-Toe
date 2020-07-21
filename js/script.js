@@ -28,7 +28,7 @@ const gameBoard = (() => {
             const field = document.createElement('div');
             field.classList.add("field");
             field.setAttribute('data-index', i);
-            field.addEventListener('click', displayController.populateField, {once : true});
+            field.addEventListener('click', displayController.populateField);
             field.textContent = '';
             board.appendChild(field);
         }
@@ -69,8 +69,8 @@ const displayController = (() =>{
                         event.target.classList.add('x');
                         gameBoard.fields[event.target.dataset.index] = 'x';
                         if(game.check3InARow('x')){
-                            //console.log("Winner x!");
-                            messageShow.win('X');
+                           // console.log(game.check3InARow('x'));
+                            messageShow.win('X', game.check3InARow('x'));
                             return;
                         }
                         game.turn = 2;
@@ -80,8 +80,7 @@ const displayController = (() =>{
                         event.target.classList.add('o');
                         gameBoard.fields[event.target.dataset.index] = 'o';
                         if(game.check3InARow('o')){
-                            //console.log("Winner o!");
-                            messageShow.win("O");
+                            messageShow.win("O", game.check3InARow('o'));
                             return;
                         }
                         game.turn = 1;
@@ -93,26 +92,24 @@ const displayController = (() =>{
                     }
             }
         }else{
-            if(!event.target.classList.contains('x') && !event.target.classList.contains('o')){
+            if(!event.target.classList.contains('x') && !event.target.classList.contains('o') && game.nextPlayer != 'ai'){
                 gameBoard.board.classList.toggle('x');
                 gameBoard.board.classList.toggle('o');
                 event.target.classList.add('o');
                 gameBoard.fields[event.target.dataset.index] = 'o';
                 if(game.check3InARow('o')){
-                    messageShow.win("O");
+                    messageShow.win("O", game.check3InARow("o"));
                     return;
                 }
                 if(game.checkDraw()){
                     messageShow.draw();
                 }
-                aiGame.bestMove();
+                game.nextPlayer = 'ai'; // dok ne odigra komp ja ne mogu da igram
+                setTimeout(function () {aiGame.bestMove()}, 1000);
                 
 
                
             }
-
-
-
         }
     }
     return {
@@ -121,11 +118,12 @@ const displayController = (() =>{
 })();
 
 const game = (() => {
+    let nextPlayer = 'ai';
     let aiGame = false;
     let startPlayer = 0;
     let turn = startPlayer + 1;
     const check3InARow = (sign) => {
-       return gameBoard.WINNING_COMBINATIONS.some(rowOrCol => {
+       return gameBoard.WINNING_COMBINATIONS.find(rowOrCol => { // find da bih mogao da promenim boju
            return rowOrCol.every(field => {
                return gameBoard.fields[field] == sign;
            })
@@ -144,6 +142,7 @@ const game = (() => {
         checkDraw,
         startPlayer,
         aiGame,
+        nextPlayer,
     }
 })();
 
@@ -155,7 +154,7 @@ const messageShow = (() => {
     const score1 = document.querySelector("#score1");
     const score2 = document.querySelector("#score2");
 
-    const win = (sign) => {
+    const win = (sign, winComb) => {
         modal.style.display = 'flex';
         message.textContent = `Winner is ${sign}!`;
         if(sign == 'X'){
@@ -166,7 +165,9 @@ const messageShow = (() => {
             player2.score++;
             score2.textContent = player2.score;
         }
-        //console.log(player1.score);
+        winComb.forEach(field => {
+            document.querySelector(`[data-index="${field}"]`).style.backgroundColor = 'rgb(16, 201, 41)';
+        })
     };
 
     const draw = () => {
@@ -182,7 +183,7 @@ const messageShow = (() => {
         score2.textContent = 0;
         gameBoard.startUp(true);
         if(game.aiGame){
-            aiGame.bestMove();
+            setTimeout(function () {aiGame.bestMove()}, 1000);
         }
     }
 
@@ -194,9 +195,10 @@ const messageShow = (() => {
         }else{
             if(game.startPlayer == 0){
                 game.startPlayer = 1;
+                game.nextPlayer = 'human';
             }else{
                 game.startPlayer = 0;
-                aiGame.bestMove();
+                setTimeout(function () {aiGame.bestMove()}, 1000);
             }
         }
     }
@@ -225,8 +227,8 @@ const welcomePage = (() => {
         welcomePage.style.display = 'none';
         gamePage.style.display = 'flex';
         body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
-        ply1.textContent = `${in1.value} (x)`;
-        ply2.textContent = `${in2.value} (o)`;
+        ply1.textContent = `${in1.value != '' ? in1.value : 'Player1'} (x)`;
+        ply2.textContent = `${in2.value != '' ? in2.value : 'Player2'} (o)`;
                
     }
 
@@ -237,7 +239,7 @@ const welcomePage = (() => {
         ply1.textContent = 'Computer (x)';
         ply2.textContent = 'Player (o)';
         game.aiGame = true;
-        aiGame.bestMove(); 
+        setTimeout(function () {aiGame.bestMove()}, 1000);
     }
 
     const playerMenu = () => {

@@ -1,3 +1,8 @@
+//TODO - Efekat kad se klikne na polje
+//TODO - Back dugme
+//TODO - Favicon
+//TODO - README + Gif
+//TODO - Okaciti na TOP
 const aiGame = (() => {
     let score = {
         x : 10,
@@ -26,12 +31,13 @@ const aiGame = (() => {
         gameBoard.board.classList.toggle('x');
         gameBoard.board.classList.toggle('o');
         if(game.check3InARow('x')){
-            messageShow.win('X');
+            messageShow.win('X', game.check3InARow('x'));
             return;
         }
         if(game.checkDraw()){
             messageShow.draw();
         }
+        game.nextPlayer = 'human';
 
     }
 
@@ -74,11 +80,3 @@ const aiGame = (() => {
         bestMove
     }
 })();
-
-
-//TODO - Obojiti drugom bojom pobenicku kombinaciju                                                 
-//TODO - AI posle par sekundi
-//TODO - Efekat kad se klikne na polje
-//TODO - Back dugme
-//TODO - README
-//TODO - Okaciti na TOP
