@@ -187,7 +187,9 @@ const welcomePage = (() => {
         welcomePage.style.display = 'none';
         gamePage.style.display = 'flex';
         body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
-        
+        ply1.textContent = `${in1.value} (x)`;
+        ply2.textContent = `${in2.value} (o)`;
+               
     }
 
     const playerMenu = () => {
@@ -206,12 +208,12 @@ const welcomePage = (() => {
         btnPlay.addEventListener('click', showGameboard);
         container.appendChild(btnPlay);
         const in1 = document.querySelector('#in1');
-        console.log(in1); // ne ovde
+        const in2 = document.querySelector("#in2");
     }
    
-    
-    
     btnPlayer.addEventListener('click', playerMenu);
+
+
 })();
 
 const player = (name, sign) => {
@@ -224,7 +226,7 @@ const player = (name, sign) => {
     }
 };
 
-const player1 = player('Stefan', 'x'); // ovo zakomentarisati (pri pokretanju se pravi)
+const player1 = player('Stefan', 'x'); 
 const player2 = player('Aleksa', 'o');
 
 

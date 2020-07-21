@@ -78,6 +78,7 @@ body{
     font-size: 1.8rem;
     color: whitesmoke;
     box-shadow: 0 0 3px 1px rgb(115, 201, 235);
+    cursor: pointer;
 }
 #welcomePage button:hover{
     background-color: rgb(115, 201, 235);
