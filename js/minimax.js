@@ -1,4 +1,3 @@
-//TODO - README + Gif
 //TODO - Okaciti na TOP
 const aiGame = (() => {
     let score = {

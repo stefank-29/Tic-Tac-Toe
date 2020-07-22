@@ -228,7 +228,7 @@ const welcomePage = (() => {
     const showGameboard = () => {
         welcomePage.style.display = 'none';
         gamePage.style.display = 'flex';
-        body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
+        body.style.backgroundImage = `url('https://stefank-29.github.io/images/tic-tac-toe.png')`;
         ply1.textContent = `${in1.value != '' ? in1.value : 'Player1'} (x)`;
         ply2.textContent = `${in2.value != '' ? in2.value : 'Player2'} (o)`;
         game.aiGame = false;
@@ -237,7 +237,7 @@ const welcomePage = (() => {
     const showAiGameboard = () => {
         welcomePage.style.display = 'none';
         gamePage.style.display = 'flex';
-        body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
+        body.style.backgroundImage = `url('https://stefank-29.github.io/images/tic-tac-toe.png')`;
         ply1.textContent = 'Computer (x)';
         ply2.textContent = 'Player (o)';
         game.aiGame = true;
