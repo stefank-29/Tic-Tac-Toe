@@ -231,6 +231,7 @@ const welcomePage = (() => {
         body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
         ply1.textContent = `${in1.value != '' ? in1.value : 'Player1'} (x)`;
         ply2.textContent = `${in2.value != '' ? in2.value : 'Player2'} (o)`;
+        game.aiGame = false;
     }
 
     const showAiGameboard = () => {
@@ -240,6 +241,7 @@ const welcomePage = (() => {
         ply1.textContent = 'Computer (x)';
         ply2.textContent = 'Player (o)';
         game.aiGame = true;
+        game.startPlayer = 0;
         setTimeout(function () {aiGame.bestMove()}, 1000);
     }
 
@@ -247,6 +249,19 @@ const welcomePage = (() => {
         gamePage.style.display = 'none';
         welcomePage.style.display = 'flex';
         body.style.backgroundImage = `url('../images/moroccan-flower-dark.png')`;
+        container.innerHTML = `<div id= "title">
+        Tic Tac Toe
+        </div>
+
+        <div id="buttons">
+            <button id="btnPlayer">Player</button>
+            <button id="btnComputer">Computer</button>
+        </div>`;
+        const btnPlayer = document.querySelector("#btnPlayer");
+        const btnComputer = document.querySelector("#btnComputer");
+        btnPlayer.addEventListener('click', playerMenu);
+        btnComputer.addEventListener('click', showAiGameboard);
+        game.aiGame = false;
         messageShow.restartGame();
     }
 
@@ -260,12 +275,18 @@ const welcomePage = (() => {
             <p>Player 2</p>
             <input id='in2' type="text">
         </div>
+        <button id="btnPlay">Play</button>
         `;
-        const btnPlay = document.createElement('button');
+        
+        /*const btnPlay = document.createElement('button');
         btnPlay.textContent = 'Play';
         btnPlay.setAttribute('id', 'btnPlay');
         btnPlay.addEventListener('click', showGameboard);
-        container.appendChild(btnPlay);
+        container.appendChild(btnPlay);*/
+        const btnBack = document.querySelector("#backIcon");
+        btnBack.addEventListener('click', showMainPage);
+        const btnPlay = document.querySelector("#btnPlay");
+        btnPlay.addEventListener('click', showGameboard);
         const in1 = document.querySelector('#in1');
         const in2 = document.querySelector("#in2");
     }
