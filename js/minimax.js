@@ -1,5 +1,3 @@
-//TODO - Back dugme
-//TODO - Favicon
 //TODO - README + Gif
 //TODO - Okaciti na TOP
 const aiGame = (() => {
