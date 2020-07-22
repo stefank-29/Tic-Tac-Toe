@@ -1,4 +1,3 @@
-//TODO - Efekat kad se klikne na polje
 //TODO - Back dugme
 //TODO - Favicon
 //TODO - README + Gif

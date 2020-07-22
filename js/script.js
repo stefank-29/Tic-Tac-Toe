@@ -210,6 +210,7 @@ const messageShow = (() => {
     return{
         win,
         draw,
+        restartGame,
     }
 })();
 
@@ -221,7 +222,8 @@ const welcomePage = (() => {
     const gamePage = document.querySelector(".page-container");
     const ply1 = document.querySelector("#player1");
     const ply2 = document.querySelector("#player2");
-    const body = document.querySelector("body");
+    const body = document.querySelector("body"); 
+    const btnBack = document.querySelector("#backIcon");
 
     const showGameboard = () => {
         welcomePage.style.display = 'none';
@@ -229,7 +231,6 @@ const welcomePage = (() => {
         body.style.backgroundImage = `url('../images/tic-tac-toe.png')`;
         ply1.textContent = `${in1.value != '' ? in1.value : 'Player1'} (x)`;
         ply2.textContent = `${in2.value != '' ? in2.value : 'Player2'} (o)`;
-               
     }
 
     const showAiGameboard = () => {
@@ -242,8 +243,16 @@ const welcomePage = (() => {
         setTimeout(function () {aiGame.bestMove()}, 1000);
     }
 
+    const showMainPage = () => {
+        gamePage.style.display = 'none';
+        welcomePage.style.display = 'flex';
+        body.style.backgroundImage = `url('../images/moroccan-flower-dark.png')`;
+        messageShow.restartGame();
+    }
+
     const playerMenu = () => {
-        container.innerHTML = `<div id="player1">
+        container.innerHTML = `<img id="backIcon" src="images/back-icon.png" 
+        alt="back icon" style="width: 45px; height: 45px"> <div id="player1">
         <p>Player 1</p>
             <input id='in1' type="text">
         </div>
@@ -263,6 +272,7 @@ const welcomePage = (() => {
    
     btnPlayer.addEventListener('click', playerMenu);
     btnComputer.addEventListener('click', showAiGameboard);
+    btnBack.addEventListener('click', showMainPage);
 
 })();
 

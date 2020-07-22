@@ -28,6 +28,7 @@ body{
 }
 
 #welcome-container{
+    position: relative;
     display: flex;
     height: 50rem;
     width: 60rem;
@@ -118,6 +119,29 @@ body{
     margin: 1rem 0.5rem;
     text-shadow: 0 0 10px rgb(115, 201, 235);
 }
+/***********back*******************/
+
+#backIcon{
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+    cursor: pointer;
+}
+
+#backIcon:hover{
+    animation: back 0.3s ease-in-out 1 forwards;
+}
+
+
+@keyframes back{
+    25%{
+        transform: rotate(-20deg);
+    }
+    75%{
+        transform: rotate(20deg);
+    }
+}
+
 
 /**************************************/
 
@@ -146,6 +170,7 @@ body{
 .field.x::after,
 .field.field.x::before{
     background-color: black;
+    animation: move 0.2s ease-in-out 1 forwards;
 }
 .board.x .field:not(.x):not(.o):hover::after,
 .board.x .field:not(.x):not(.o):hover::before{
@@ -186,6 +211,7 @@ body{
 
 .field.o::after,
 .field.o::before{
+    animation: move 0.2s ease-in-out 1 forwards;
     border: calc(var(--signSize)*0.15) solid black;
 }
 
@@ -211,6 +237,13 @@ body{
 }
 .field:nth-child(7),.field:nth-child(8),.field:nth-child(9){
     border-bottom: none;
+}
+
+/***************animation***************/
+@keyframes move{
+    0%{
+        transform: scale(0.2);
+    }
 }
 
 
