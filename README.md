@@ -13,3 +13,4 @@ Tic Tac Toe game built for assignment as part of the curriculum for the JavaScri
 * JavaScript
 * CSS3
 * HTML5
+* Git
